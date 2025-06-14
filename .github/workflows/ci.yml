@@ -24,21 +24,25 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get -q -y install libglu1-mesa-dev libgl1-mesa-dev libxi-dev libglfw3-dev libgles2-mesa-dev
+
       - name: "Prepare VM"
-        run: |
-          sudo rm -Rf /home/linuxbrew/
+        run: sudo rm -Rf /home/linuxbrew/
+
       - name: "Clone pyOCCT"
         uses: actions/checkout@v3
         with:
           submodules: 'recursive'
+
       - name: "Create env"
         uses: mamba-org/setup-micromamba@v2
         with:
             environment-file: binder/environment.yml
             cache-environment: true
+
       - name: "Generate bindings"
         shell: micromamba-shell {0}
         run: python binder/run.py -c binder/config.txt -o src
+
       - name: "Upload bindings"
         uses: actions/upload-artifact@v4
         with:
@@ -54,33 +58,20 @@ jobs:
       matrix:
         os: ['windows-latest']
     steps:
-
       - name: "Clone pyOCCT"
         uses: actions/checkout@v3
         with:
           submodules: 'recursive'
 
-      - name: "Add conda to PATH"
-        shell: bash -l {0}
-        run: echo "$CONDA/Scripts" >> $GITHUB_PATH
-
-      - name: "Configure conda"
-        shell: bash -l {0}
-        run: |
-          conda init --all
-          conda env create -f binder/environment.yml
-
-      - name: "Check conda"
-        shell: bash -l {0}
-        run: |
-          conda activate binder
-          conda info -a
-          conda list
+      - name: "Create env"
+        uses: mamba-org/setup-micromamba@v2
+        with:
+            environment-file: binder/environment.yml
+            cache-environment: true
 
       - name: "Generate bindings"
         shell: bash -l {0}
         run: |
-          conda activate binder
           set CONDA_DLL_SEARCH_MODIFICATION_ENABLE=1
           python binder/run.py -c binder/config.txt -o src
 
@@ -114,11 +105,13 @@ jobs:
 
       - name: "Clone pyOCCT"
         uses: actions/checkout@v3
+
       - name: "Download binding sources"
         uses: actions/download-artifact@v4
         with:
           name: pyocct_src_${{ matrix.os }}
           path: src
+
       - name: "Create build env"
         uses: mamba-org/setup-micromamba@v2
         with:
@@ -126,7 +119,10 @@ jobs:
             cache-environment: true
       - name: "Run conda build"
         shell: micromamba-shell {0}
-        run: boa build ci --python ${{ matrix.python-version }} --output-folder output
+        run: |
+            mkdir output
+            boa build ci --python ${{ matrix.python-version }} --output-folder output
+
       - name: "Upload conda package"
         uses: actions/upload-artifact@v4
         with:
@@ -142,27 +138,11 @@ jobs:
       fail-fast: false
       matrix:
         os: ['windows-latest']
-        python-version: ['3.9', '3.10', '3.11', '3.12']
+        python-version: ['3.12', '3.13']
     steps:
 
       - name: "Clone pyOCCT"
         uses: actions/checkout@v3
-
-      - name: "Add conda to PATH"
-        shell: bash -l {0}
-        run: echo "$CONDA/Scripts" >> $GITHUB_PATH
-
-      - name: "Install conda build"
-        shell: bash -l {0}
-        run: |
-            conda config --env --add channels conda-forge
-            conda install conda-build==3.27.0 boa
-
-      - name: "Check conda"
-        shell: bash -l {0}
-        run: |
-          conda info -a
-          conda list
 
       - name: "Download binding sources"
         uses: actions/download-artifact@v4
@@ -176,18 +156,23 @@ jobs:
           rm -Rf C:/ProgramData/chocolatey/
           rm -Rf C:/Program Files/LLVM
 
+      - name: "Create build env"
+        uses: mamba-org/setup-micromamba@v2
+        with:
+            environment-file: environment.yml
+            cache-environment: true
+
       - name: "Run conda build"
         shell: bash -l {0}
         run: |
-          mkdir conda
-          source activate
-          boa build ci --python ${{ matrix.python-version }} --output-folder conda
+            mkdir output
+            boa build ci --python ${{ matrix.python-version }} --output-folder output
 
       - name: "Upload conda package"
         uses: actions/upload-artifact@v4
         with:
           name: pyocct-py${{ matrix.python-version }}_${{ matrix.os }}
-          path: conda
+          path: output
 
   generate_macos:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
