@@ -40,7 +40,7 @@ jobs:
           micromamba activate binder
           python binder/run.py -c binder/config.txt -o src
       - name: "Upload bindings"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pyocct_src_${{ matrix.os }}
           path: src
@@ -85,7 +85,7 @@ jobs:
           python binder/run.py -c binder/config.txt -o src
 
       - name: "Upload bindings"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pyocct_src_${{ matrix.os }}
           path: src
@@ -115,7 +115,7 @@ jobs:
       - name: "Clone pyOCCT"
         uses: actions/checkout@v3
       - name: "Download binding sources"
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: pyocct_src_${{ matrix.os }}
           path: src
@@ -126,7 +126,7 @@ jobs:
       - name: "Run conda build"
         run: boa build ci --python ${{ matrix.python-version }} --output-folder output
       - name: "Upload conda package"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pyocct-py${{ matrix.python-version }}_${{ matrix.os }}
           path: output
@@ -163,7 +163,7 @@ jobs:
           conda list
 
       - name: "Download binding sources"
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: pyocct_src_${{ matrix.os }}
           path: src
@@ -182,7 +182,7 @@ jobs:
           boa build ci --python ${{ matrix.python-version }} --output-folder conda
 
       - name: "Upload conda package"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pyocct-py${{ matrix.python-version }}_${{ matrix.os }}
           path: conda
@@ -228,7 +228,7 @@ jobs:
           python binder/run.py -c binder/config.txt -o src
 
       - name: "Upload bindings"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pyocct_src_${{ matrix.os }}
           path: src
@@ -273,7 +273,7 @@ jobs:
 #          conda list
 #
 #      - name: "Download binding sources"
-#        uses: actions/download-artifact@v3
+#        uses: actions/download-artifact@v4
 #        with:
 #          name: pyocct_src_${{ matrix.os }}
 #          path: src/occt
@@ -286,7 +286,7 @@ jobs:
 #          boa build ci --python ${{ matrix.python-version }} --output-folder conda
 #
 #      - name: "Upload conda package"
-#        uses: actions/upload-artifact@v3
+#        uses: actions/upload-artifact@v4
 #        with:
 #          name: pyocct-py${{ matrix.python-version }}_${{ matrix.os }}
 #          path: conda
