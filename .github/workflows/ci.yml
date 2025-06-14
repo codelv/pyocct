@@ -35,6 +35,7 @@ jobs:
         uses: mamba-org/setup-micromamba@v2
         with:
             environment-file: binder/environment.yml
+            init-shell: bash
       - name: "Generate bindings"
         run: |
           micromamba activate binder
@@ -123,6 +124,7 @@ jobs:
         uses: mamba-org/setup-micromamba@v2
         with:
             environment-file: environment.yml
+            init-shell: bash
       - name: "Run conda build"
         run: boa build ci --python ${{ matrix.python-version }} --output-folder output
       - name: "Upload conda package"
