@@ -35,11 +35,10 @@ jobs:
         uses: mamba-org/setup-micromamba@v2
         with:
             environment-file: binder/environment.yml
+            cache-environment: true
             init-shell: bash
       - name: "Generate bindings"
-        run: |
-          micromamba activate binder
-          python binder/run.py -c binder/config.txt -o src
+        run: python binder/run.py -c binder/config.txt -o src
       - name: "Upload bindings"
         uses: actions/upload-artifact@v4
         with:
@@ -124,6 +123,7 @@ jobs:
         uses: mamba-org/setup-micromamba@v2
         with:
             environment-file: environment.yml
+            cache-environment: true
             init-shell: bash
       - name: "Run conda build"
         run: boa build ci --python ${{ matrix.python-version }} --output-folder output
