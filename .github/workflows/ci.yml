@@ -36,8 +36,8 @@ jobs:
         with:
             environment-file: binder/environment.yml
             cache-environment: true
-            init-shell: bash
       - name: "Generate bindings"
+        shell: micromamba-shell {0}
         run: python binder/run.py -c binder/config.txt -o src
       - name: "Upload bindings"
         uses: actions/upload-artifact@v4
@@ -124,8 +124,8 @@ jobs:
         with:
             environment-file: environment.yml
             cache-environment: true
-            init-shell: bash
       - name: "Run conda build"
+        shell: micromamba-shell {0}
         run: boa build ci --python ${{ matrix.python-version }} --output-folder output
       - name: "Upload conda package"
         uses: actions/upload-artifact@v4
