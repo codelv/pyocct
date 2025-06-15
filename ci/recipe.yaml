@@ -8,7 +8,7 @@ source:
   path: ../
 
 build:
-  number: 104
+  number: 105
 
 requirements:
   build:
@@ -26,8 +26,9 @@ requirements:
     - python
     - pybind11
     - occt ==7.9.0
-    - tbb-devel
-
+    - tbb-deve
+    - setuptools
+    
   run:
     - python
     - occt ==7.9.0
