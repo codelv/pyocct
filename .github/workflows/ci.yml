@@ -71,9 +71,7 @@ jobs:
 
       - name: "Generate bindings"
         shell: bash -l {0}
-        run: |
-          set CONDA_DLL_SEARCH_MODIFICATION_ENABLE=1
-          python binder/run.py -c binder/config.txt -o src
+        run: python binder/run.py -c binder/config.txt -o src
 
       - name: "Upload bindings"
         uses: actions/upload-artifact@v4
@@ -162,12 +160,10 @@ jobs:
 
       - name: "Run conda build"
         shell: bash -l {0}
-        run: |
-            mkdir output
-            boa build ci --python ${{ matrix.python-version }} --output-folder output
+        run: boa build ci --python ${{ matrix.python-version }}
 
       - name: "Upload conda package"
         uses: actions/upload-artifact@v4
         with:
           name: pyocct-py${{ matrix.python-version }}_${{ matrix.os }}
-          path: output
+          path:  $HOME/micromamba/envs/pyocct/conda-bld/win-64
