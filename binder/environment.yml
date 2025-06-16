@@ -6,6 +6,7 @@ dependencies:
   - clangdev
   - python-clang
   - occt=7.9.0
+  - libcxx-devel # [not win]
   - tbb-devel
   - rapidjson
   - pybind11
