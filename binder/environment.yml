@@ -5,7 +5,6 @@ dependencies:
   - python=3.13
   - clangdev
   - python-clang
-  - libcxx-devel
   - occt=7.9.0
   - tbb-devel
   - rapidjson
