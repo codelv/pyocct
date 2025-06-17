@@ -411,6 +411,8 @@
 -function IGESSelect_SelectBasicGeom::CurvesOnly
 
 -function IGESToBRep_TopoSurface::TransferPlaneSurface
+# Not available on windows
+-function Image_AlienPixMap::GetPalette
 
 -function IVtkOCC_SelectableObject::IVtkOCC_SelectableObject
 -function IVtkOCC_Shape::GetSubShapeId(const IVtk_IShape::Handle &)
