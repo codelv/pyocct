@@ -198,6 +198,7 @@
 -function *std::istream*
 -function *std::ostream*
 -function *OperationsFlags*
+-function *CPnts_RealFunction*
 -rtype *Standard_OStream*
 -rtype *Standard_IStream*
 -rtype *Standard_SStream*
