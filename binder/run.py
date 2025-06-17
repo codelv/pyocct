@@ -11,6 +11,9 @@ if not os.path.isdir(PYBINDER_ROOT):
 if PYBINDER_ROOT not in sys.path:
     sys.path.append(PYBINDER_ROOT)
 
+if sys.platform.startswith('win'):
+    os.add_dll_directory("C:/Users/runneradmin/micromamba/envs/binder/Library")
+
 from pybinder.core import Generator
 
 
