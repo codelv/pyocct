@@ -49,6 +49,8 @@
 -class Graphic3d_BvhCStructureSetTrsfPers
 -class Graphic3d_Layer
 
+-class IFSelect_Act
+
 -class Message_ProgressScope
 -class Message_LazyProgressScope
 
