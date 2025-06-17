@@ -443,6 +443,8 @@
 
 -function NCollection_CellFilter<Inspector>::Remove
 
+
+
 -function Interval::Interval
 -function Interval::IntersectionWithBounded
 -function Interval::Length
@@ -563,6 +565,7 @@
 
 -function OSD_OpenStream
 -function OSD_Thread::OSD_Thread(const OSD_ThreadFunction &)
+-function OSD_Thread::SetFunction
 -function OSD::RealToCString_
 -function OSD_SharedLibrary::DlSymb
 -function OSD_Path::LocateExecFile
