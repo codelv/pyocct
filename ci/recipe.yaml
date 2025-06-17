@@ -13,6 +13,7 @@ build:
 requirements:
   build:
     - sel(win): '{{ compiler("cxx") }}'
+    - sel(win): glew
     - cmake
     - ninja
     - rapidjson
