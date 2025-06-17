@@ -160,7 +160,7 @@ jobs:
 
       - name: "Run conda build"
         shell: bash -l {0}
-        run: boa build ci --python ${{ matrix.python-version }}
+        run: boa build ci --python ${{ matrix.python-version }} -m ci/conda_build_config.yaml
 
       - name: "Upload conda package"
         uses: actions/upload-artifact@v4
