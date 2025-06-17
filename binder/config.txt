@@ -613,6 +613,8 @@
 
 # Undefined symbol on Linux
 -function ShapeFix_Edge::Context
+# func ptr
+-function ShapeProcess_UOperator::ShapeProcess_UOperator
 
 -function Standard_ErrorHandler::Label
 
