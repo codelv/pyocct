@@ -1,8 +1,10 @@
 import argparse
 import os
 import sys
+from glob import glob
 
 # Add the binding generator to the path
+CONDA_PREFIX = os.environ.get('CONDA_PREFIX')
 BINDER_ROOT = os.path.dirname(os.path.realpath(__file__))
 PYBINDER_ROOT = os.path.join(BINDER_ROOT, 'pyOCCT_binder')
 if not os.path.isdir(PYBINDER_ROOT):
@@ -11,8 +13,11 @@ if not os.path.isdir(PYBINDER_ROOT):
 if PYBINDER_ROOT not in sys.path:
     sys.path.append(PYBINDER_ROOT)
 
-if sys.platform.startswith('win'):
-    os.add_dll_directory("C:/Users/runneradmin/micromamba/envs/binder/Library")
+if sys.platform.startswith("win"):
+    from clang.cindex import conf
+    if not os.path.exists(conf.get_filename()):
+        libclang_dlls = glob(f"{CONDA_PREFIX}/Library/bin/libclang*.dll")
+        conf.set_library_file(libclang_dlls[0])
 
 from pybinder.core import Generator
 
@@ -118,14 +123,11 @@ def main():
 
     args = parser.parse_args()
 
-    # Get the root directory of the conda environment
-    conda_prefix = os.environ.get('CONDA_PREFIX')
-
     # Attempt to find include directories by searching for a known header file. Will likely
     # need to make this more robust.
-    occt_include_path = find_include_path('Standard.hxx', conda_prefix)
-    vtk_include_path = find_include_path('vtk_doubleconversion.h', conda_prefix)
-    tbb_include_path = find_include_path('tbb.h', conda_prefix)
+    occt_include_path = find_include_path('Standard.hxx', CONDA_PREFIX)
+    vtk_include_path = find_include_path('vtk_doubleconversion.h', CONDA_PREFIX)
+    tbb_include_path = find_include_path('tbb.h', CONDA_PREFIX)
     tbb_include_path = os.path.split(tbb_include_path)[0]
 
     print('Include directories:')
@@ -137,9 +139,9 @@ def main():
     clang_include_path = ''
     libcxx_include_path = ''
     if sys.platform.startswith('linux'):
-        clang_include_path = find_include_path('__stddef_max_align_t.h', conda_prefix) or ''
+        clang_include_path = find_include_path('__stddef_max_align_t.h', CONDA_PREFIX) or ''
         print('Found clangdev include directory: {}'.format(clang_include_path))
-        libcxx_include_path = find_include_path('__cxxabi_config.h', conda_prefix) or ''
+        libcxx_include_path = find_include_path('__cxxabi_config.h', CONDA_PREFIX) or ''
         print('\tlibcxx: {}'.format(libcxx_include_path))
 
     if not occt_include_path or not os.path.exists(occt_include_path):
