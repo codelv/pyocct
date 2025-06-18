@@ -95,8 +95,6 @@
 -class Storage_BucketIterator
 -class Storage_BucketOfPersistent
 
--class tagMSG
-
 # Excluded typedefs -----------------------------------------------------------
 -typedef BinMDF_TypeIdMap
 
@@ -906,6 +904,8 @@
 +header IVtkTools: vtkActor.h
 +header IVtkTools: vtkRenderer.h
 +header IVtkVTK: vtkRenderer.h
+
++header WNT: winuser.h
 
 +header XCAFDoc: TCollection_ExtendedString.hxx
 
