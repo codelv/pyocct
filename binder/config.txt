@@ -647,6 +647,8 @@
 -function TCollection_ExtendedString::ToWideString
 
 -function TDF_Label::FindAttribute
+-function TDF_AttributeIterator::TDF_AttributeIterator(const TDF_LabelNode*)
+-function TDF_AttributeIterator::TDF_AttributeIterator(const TDF_LabelNode*, const bool)
 -function TDF_DerivedAttribute::Register_
 
 -function TDocStd_Application::Open
