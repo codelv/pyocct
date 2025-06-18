@@ -905,7 +905,7 @@
 +header IVtkTools: vtkRenderer.h
 +header IVtkVTK: vtkRenderer.h
 
-+header WNT: winuser.h
++header WNT: windows.h
 
 +header XCAFDoc: TCollection_ExtendedString.hxx
 
