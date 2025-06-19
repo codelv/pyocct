@@ -95,7 +95,6 @@
 -class Storage_BucketIterator
 -class Storage_BucketOfPersistent
 
--class tagMSG
 
 # Excluded typedefs -----------------------------------------------------------
 -typedef BinMDF_TypeIdMap
@@ -688,9 +687,6 @@
 -function VrmlData_Scene::ReadArrIndex
 -function VrmlData_Scene::WriteArrIndex
 
-# TODO: Fix tagMSG
--function WNT_Window::ProcessMessage
-
 -function XCAFDoc_GeomTolerance::XCAFDoc_GeomTolerance(const opencascade::handle<XCAFDoc_GeomTolerance> &)
 -function XCAFDoc_ShapeTool::FindSubShape
 
@@ -910,10 +906,10 @@
 +header IVtkTools: vtkRenderer.h
 +header IVtkVTK: vtkRenderer.h
 
++header WNT: xTypes.h
+
 +header XCAFDoc: TCollection_ExtendedString.hxx
-
 +header XmlMXCAFDoc: TopTools_LocationSet.hxx
-
 +header XmlObjMgt: LDOM_MemManager.hxx
 +header Xw: xTypes.h
 
