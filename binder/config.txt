@@ -427,6 +427,7 @@
 -function IVtkOCC_ViewerSelector::Activate
 -function IVtkOCC_ViewerSelector::Deactivate
 -function IVtkOCC_ViewerSelector::Pick
+-function@win32 IVtkOCC_ViewerSelector::ConvertVtkToOccCamera
 
 -function Media_BufferPool::GetBuffer
 -function Media_CodecContext::Init
