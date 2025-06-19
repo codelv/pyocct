@@ -38,6 +38,7 @@ in X library files, which may not be present in all systems anyway.
 #endif
 
 #if defined(_WIN32)
+#include "windows.h"
 struct tagMSG {
     HWND   hwnd;
     UINT   message;
