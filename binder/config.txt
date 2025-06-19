@@ -255,6 +255,12 @@
 -function BRepExtrema_OverlapTool::LoadTriangleSets
 -function BRepExtrema_OverlapTool::Perform
 
+# Windows link errors
+-function@win32 BRepExtrema_ProximityDistTool::LoadAdditionalPointsFirstSet
+-function@win32 BRepLib_ValidateEdge::SetExitIfToleranceExceeded
+-function@win32 BRepTools_PurgeLocations::ModifiedShape
+
+
 -function BRepFeat::IsInOut_
 -function BRepFeat_MakeLinearForm::TransformShapeFU
 -function BRepFill_AdvancedEvolved::SetTemporaryDirectory
