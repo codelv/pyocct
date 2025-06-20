@@ -581,6 +581,8 @@
 -function OpenGl_Material::Init
 -function OpenGl_RaytraceLight::OpenGl_RaytraceLight
 -function OpenGl_ShaderManager::PushMaterialState
+-function@win32 OpenGl_ShadowMap::OpenGl_ShadowMap
+-function@win32 OpenGl_ShaderManager::BindFontProgram
 -function OpenGl_TriangleSet::OpenGl_TriangleSet
 -function OpenGl_TriangleSet::QuadBVH
 -function OpenGl_TriangleSet::Box
@@ -589,6 +591,8 @@
 -function OpenGl_Group::GlStruct
 -function OpenGl_DepthPeeling::DepthPeelFbosOit
 -function OpenGl_DepthPeeling::FrontBackColorFbosOit
+
+
 -function PCDM::FileDriverType_
 -function PCDM_DOMHeaderParser::SetStartElementName
 -function PCDM_DOMHeaderParser::SetEndElementName
