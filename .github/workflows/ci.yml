@@ -166,4 +166,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pyocct-py${{ matrix.python-version }}_${{ matrix.os }}
-          path:  $HOME/micromamba/envs/pyocct/conda-bld/win-64
+          path: ~/micromamba/envs/pyocct/conda-bld/win-64
