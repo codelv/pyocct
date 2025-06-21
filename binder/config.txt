@@ -74,6 +74,8 @@
 -class RWObj_MtlReader
 -class RWGltf_GltfOStreamWriter
 
+-class@win32 Select3D_SensitiveCircle
+
 -class ShapePersistent_BRep
 -class ShapePersistent_Geom
 -class ShapePersistent_Geom_Curve
