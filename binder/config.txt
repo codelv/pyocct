@@ -648,22 +648,7 @@
 
 # win32 Link errors
 -function@win32 StepFile_Interrupt
--function@win32 StepFile_ReadData::GetLastError
--function@win32 StepFile_ReadData::ErrorHandle
--function@win32 StepFile_ReadData::AddError
--function@win32 StepFile_ReadData::GetNbRecord
--function@win32 StepFile_ReadData::GetModePrint
--function@win32 StepFile_ReadData::SetModePrint
--function@win32 StepFile_ReadData::SetTypeArg
--function@win32 StepFile_ReadData::FinalOfHead
--function@win32 StepFile_ReadData::PrepareNewArg
--function@win32 StepFile_ReadData::PrintCurrentRecord
--function@win32 StepFile_ReadData::NextRecord
--function@win32 StepFile_ReadData::RecordTypeText
--function@win32 StepFile_ReadData::GetFileNbR
--function@win32 StepFile_ReadData::ClearRecorder
--function@win32 StepFile_ReadData::FinalOfScope
--function@win32 StepFile_ReadData::AddNewScope
+-class@win32 StepFile_ReadData
 
 -function StepFile_ReadData::GetArgDescription
 -function StepFile_ReadData::GetRecordDescription
