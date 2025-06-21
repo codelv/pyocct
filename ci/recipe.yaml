@@ -8,15 +8,17 @@ source:
   path: ../
 
 build:
-  number: 104
+  number: 105
 
 requirements:
   build:
     - sel(win): '{{ compiler("cxx") }}'
+    - sel(win): glew
     - cmake
     - ninja
     - rapidjson
     - python
+    - setuptools
     - sel(linux): vtk * egl*
     - sel(linux): '{{ cdt("mesa-libgl-devel") }}'
     - sel(linux): '{{ cdt("libxi-devel") }}'
@@ -27,7 +29,8 @@ requirements:
     - pybind11
     - occt ==7.9.0
     - tbb-devel
-
+    - setuptools
+    
   run:
     - python
     - occt ==7.9.0

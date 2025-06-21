@@ -49,6 +49,8 @@
 -class Graphic3d_BvhCStructureSetTrsfPers
 -class Graphic3d_Layer
 
+-class IFSelect_Act
+
 -class Message_ProgressScope
 -class Message_LazyProgressScope
 
@@ -72,6 +74,8 @@
 -class RWObj_MtlReader
 -class RWGltf_GltfOStreamWriter
 
+-class@win32 Select3D_SensitiveCircle
+
 -class ShapePersistent_BRep
 -class ShapePersistent_Geom
 -class ShapePersistent_Geom_Curve
@@ -92,6 +96,7 @@
 -class Storage_Bucket
 -class Storage_BucketIterator
 -class Storage_BucketOfPersistent
+
 
 # Excluded typedefs -----------------------------------------------------------
 -typedef BinMDF_TypeIdMap
@@ -198,6 +203,7 @@
 -function *std::istream*
 -function *std::ostream*
 -function *OperationsFlags*
+-function *CPnts_RealFunction*
 -rtype *Standard_OStream*
 -rtype *Standard_IStream*
 -rtype *Standard_SStream*
@@ -250,6 +256,12 @@
 -function BRepExtrema_OverlapTool::BRepExtrema_OverlapTool
 -function BRepExtrema_OverlapTool::LoadTriangleSets
 -function BRepExtrema_OverlapTool::Perform
+
+# Windows link errors
+-function@win32 BRepExtrema_ProximityDistTool::LoadAdditionalPointsFirstSet
+-function@win32 BRepLib_ValidateEdge::SetExitIfToleranceExceeded
+-function@win32 BRepTools_PurgeLocations::ModifiedShape
+
 
 -function BRepFeat::IsInOut_
 -function BRepFeat_MakeLinearForm::TransformShapeFU
@@ -408,6 +420,7 @@
 -function IGESSelect_SelectBasicGeom::CurvesOnly
 
 -function IGESToBRep_TopoSurface::TransferPlaneSurface
+-function@win32 Image_AlienPixMap::GetPalette
 
 -function IVtkOCC_SelectableObject::IVtkOCC_SelectableObject
 -function IVtkOCC_Shape::GetSubShapeId(const IVtk_IShape::Handle &)
@@ -415,6 +428,7 @@
 -function IVtkOCC_ViewerSelector::Activate
 -function IVtkOCC_ViewerSelector::Deactivate
 -function IVtkOCC_ViewerSelector::Pick
+-function@win32 IVtkOCC_ViewerSelector::ConvertVtkToOccCamera_
 
 -function Media_BufferPool::GetBuffer
 -function Media_CodecContext::Init
@@ -437,6 +451,8 @@
 -function MyDirectPolynomialRoots::MyDirectPolynomialRoots
 
 -function NCollection_CellFilter<Inspector>::Remove
+
+
 
 -function Interval::Interval
 -function Interval::IntersectionWithBounded
@@ -558,6 +574,7 @@
 
 -function OSD_OpenStream
 -function OSD_Thread::OSD_Thread(const OSD_ThreadFunction &)
+-function OSD_Thread::SetFunction
 -function OSD::RealToCString_
 -function OSD_SharedLibrary::DlSymb
 -function OSD_Path::LocateExecFile
@@ -566,6 +583,8 @@
 -function OpenGl_Material::Init
 -function OpenGl_RaytraceLight::OpenGl_RaytraceLight
 -function OpenGl_ShaderManager::PushMaterialState
+-function@win32 OpenGl_ShadowMap::OpenGl_ShadowMap
+-function@win32 OpenGl_ShaderManager::BindFontProgram
 -function OpenGl_TriangleSet::OpenGl_TriangleSet
 -function OpenGl_TriangleSet::QuadBVH
 -function OpenGl_TriangleSet::Box
@@ -574,6 +593,8 @@
 -function OpenGl_Group::GlStruct
 -function OpenGl_DepthPeeling::DepthPeelFbosOit
 -function OpenGl_DepthPeeling::FrontBackColorFbosOit
+
+
 -function PCDM::FileDriverType_
 -function PCDM_DOMHeaderParser::SetStartElementName
 -function PCDM_DOMHeaderParser::SetEndElementName
@@ -605,6 +626,8 @@
 
 # Undefined symbol on Linux
 -function ShapeFix_Edge::Context
+# func ptr
+-function ShapeProcess_UOperator::ShapeProcess_UOperator
 
 -function Standard_ErrorHandler::Label
 
@@ -623,6 +646,10 @@
 -function StepData_StepReaderData::ReadEnumParam
 -function StepData_UndefinedEntity::Super
 
+# win32 Link errors
+-function@win32 StepFile_Interrupt
+-class@win32 StepFile_ReadData
+
 -function StepFile_ReadData::GetArgDescription
 -function StepFile_ReadData::GetRecordDescription
 
@@ -637,6 +664,8 @@
 -function TCollection_ExtendedString::ToWideString
 
 -function TDF_Label::FindAttribute
+-function TDF_AttributeIterator::TDF_AttributeIterator(const TDF_LabelNode*)
+-function TDF_AttributeIterator::TDF_AttributeIterator(const TDF_LabelNode*, const bool)
 -function TDF_DerivedAttribute::Register_
 
 -function TDocStd_Application::Open
@@ -893,10 +922,10 @@
 +header IVtkTools: vtkRenderer.h
 +header IVtkVTK: vtkRenderer.h
 
++header WNT: xTypes.h
+
 +header XCAFDoc: TCollection_ExtendedString.hxx
-
 +header XmlMXCAFDoc: TopTools_LocationSet.hxx
-
 +header XmlObjMgt: LDOM_MemManager.hxx
 +header Xw: xTypes.h
 

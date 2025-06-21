@@ -3,6 +3,7 @@ import os
 import sys
 
 # Add the binding generator to the path
+CONDA_PREFIX = os.environ.get('CONDA_PREFIX')
 BINDER_ROOT = os.path.dirname(os.path.realpath(__file__))
 PYBINDER_ROOT = os.path.join(BINDER_ROOT, 'pyOCCT_binder')
 if not os.path.isdir(PYBINDER_ROOT):
@@ -115,14 +116,11 @@ def main():
 
     args = parser.parse_args()
 
-    # Get the root directory of the conda environment
-    conda_prefix = os.environ.get('CONDA_PREFIX')
-
     # Attempt to find include directories by searching for a known header file. Will likely
     # need to make this more robust.
-    occt_include_path = find_include_path('Standard.hxx', conda_prefix)
-    vtk_include_path = find_include_path('vtk_doubleconversion.h', conda_prefix)
-    tbb_include_path = find_include_path('tbb.h', conda_prefix)
+    occt_include_path = find_include_path('Standard.hxx', CONDA_PREFIX)
+    vtk_include_path = find_include_path('vtk_doubleconversion.h', CONDA_PREFIX)
+    tbb_include_path = find_include_path('tbb.h', CONDA_PREFIX)
     tbb_include_path = os.path.split(tbb_include_path)[0]
 
     print('Include directories:')
@@ -134,9 +132,9 @@ def main():
     clang_include_path = ''
     libcxx_include_path = ''
     if sys.platform.startswith('linux'):
-        clang_include_path = find_include_path('__stddef_max_align_t.h', conda_prefix) or ''
+        clang_include_path = find_include_path('__stddef_max_align_t.h', CONDA_PREFIX) or ''
         print('Found clangdev include directory: {}'.format(clang_include_path))
-        libcxx_include_path = find_include_path('__cxxabi_config.h', conda_prefix) or ''
+        libcxx_include_path = find_include_path('__cxxabi_config.h', CONDA_PREFIX) or ''
         print('\tlibcxx: {}'.format(libcxx_include_path))
 
     if not occt_include_path or not os.path.exists(occt_include_path):

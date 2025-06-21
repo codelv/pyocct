@@ -2,7 +2,7 @@ CONDA_BUILD_SYSROOT:
  - /opt # [osx]
 
 c_compiler:
- - vs2015 # [win]
+ - vs2019 # [win]
 
 cxx_compiler:
- - vs2015 # [win]
+ - vs2019 # [win]

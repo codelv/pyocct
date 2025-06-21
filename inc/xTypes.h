@@ -37,9 +37,20 @@ in X library files, which may not be present in all systems anyway.
 #include <GL/glx.h>
 #endif
 
-struct __GLXFBConfigRec {
-
+#if defined(_WIN32)
+#include "windows.h"
+struct tagMSG {
+    HWND   hwnd;
+    UINT   message;
+    WPARAM wParam;
+    LPARAM lParam;
+    DWORD  time;
+    POINT  pt;
+    DWORD  lPrivate;
 };
+#endif
+
+struct __GLXFBConfigRec {};
 
 struct Aspect_XDisplay {};
 struct Aspect_XVisualInfo {};
