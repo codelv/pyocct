@@ -18,7 +18,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 cmake_minimum_required(VERSION 3.15...3.20)
-project(pyOCCT VERSION 7.9.0.0 LANGUAGES C CXX)
+project(pyOCCT VERSION 7.9.1.0 LANGUAGES C CXX)
 
 
 # --------------------------------------------------------------------------- #
@@ -31,7 +31,7 @@ option(ENABLE_WARNINGS "Disable warning output." OFF)
 # --------------------------------------------------------------------------- #
 set(pyOCCT_MAJOR_VERSION 7)
 set(pyOCCT_MINOR_VERSION 9)
-set(pyOCCT_PATCH_VERSION 0)
+set(pyOCCT_PATCH_VERSION 1)
 set(pyOCCT_TWEAK_VERSION 0)
 
 if(WIN32)
@@ -80,8 +80,8 @@ find_package(pybind11 CONFIG REQUIRED)
 # --------------------------------------------------------------------------- #
 # TBB (for BVH header)
 # --------------------------------------------------------------------------- #
-message(STATUS "Searching for TBB...")
-find_package(TBB REQUIRED)
+#message(STATUS "Searching for TBB...")
+#find_package(TBB)
 
 
 # --------------------------------------------------------------------------- #
@@ -109,15 +109,17 @@ find_package(Freetype REQUIRED)
 # --------------------------------------------------------------------------- #
 # GLEW
 # --------------------------------------------------------------------------- #
-message(STATUS "Searching for GLEW...")
-find_package(GLEW REQUIRED)
+#message(STATUS "Searching for GLEW...")
+#find_package(GLEW REQUIRED)
 
 # --------------------------------------------------------------------------- #
-# X11
+# X11 / Wayland
 # --------------------------------------------------------------------------- #
 if(NOT WIN32 AND NOT APPLE)
-    add_definitions (-DHAVE_XLIB)
+    add_definitions (-DHAVE_XLIB -DHAVE_EGL -DHAVE_WAYLAND)
     find_package(X11 REQUIRED)
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(Wayland REQUIRED IMPORTED_TARGET wayland-client wayland-egl)
 endif()
 
 # --------------------------------------------------------------------------- #
@@ -145,8 +147,8 @@ link_directories(${OpenCASCADE_LIBRARY_DIR})
 # ----------------------------------------------------------------------- #
 # VTK
 # ----------------------------------------------------------------------- #
-message(STATUS "Searching for VTK...")
-find_package(VTK REQUIRED CommonCore)
+#message(STATUS "Searching for VTK...")
+#find_package(VTK OPTIONAL CommonCore)
 
 # --------------------------------------------------------------------------- #
 # pyOCCT
@@ -175,7 +177,7 @@ foreach(MOD ${OCCT_MODULES})
     endif()
 
     # Check for platform-specific modules
-    if((WIN32 OR APPLE) AND ${MOD} STREQUAL "Xw")
+    if((WIN32 OR APPLE) AND (${MOD} STREQUAL "Xw" OR ${MOD} STREQUAL "Wayland"))
         message(STATUS "Skipping platform-specific module ${MOD}")
         continue()
     endif()
@@ -197,6 +199,10 @@ foreach(MOD ${OCCT_MODULES})
 
     if(${MOD} STREQUAL "OpenGl")
         target_link_libraries(${MOD} PRIVATE ${OPENGL_LIBRARIES})
+    endif()
+
+    if(${MOD} STREQUAL "Wayland")
+        target_link_libraries(${MOD} PRIVATE PkgConfig::Wayland)
     endif()
 
     set_target_properties(${MOD} PROPERTIES SUFFIX ${EXTENSION} COMPILE_FLAGS ${WARNINGS})

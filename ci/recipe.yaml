@@ -2,38 +2,33 @@ context: {}
 package:
 
   name: pyocct
-  version: 7.9.0
+  version: 7.9.1
 
 source:
   path: ../
 
 build:
-  number: 105
+  number: 104
 
 requirements:
   build:
-    - sel(win): '{{ compiler("cxx") }}'
-    - sel(win): glew
+    - '{{ compiler("cxx") }}'
     - cmake
     - ninja
     - rapidjson
     - python
     - setuptools
-    - sel(linux): vtk * egl*
-    - sel(linux): '{{ cdt("mesa-libgl-devel") }}'
-    - sel(linux): '{{ cdt("libxi-devel") }}'
-    - sel(linux): '{{ cdt("libxext-devel") }}'
 
   host:
     - python
     - pybind11
-    - occt ==7.9.0
-    - tbb-devel
+    - occt ==7.9.1
+    - sel(linux): wayland
     - setuptools
-    
+
   run:
     - python
-    - occt ==7.9.0
+    - occt ==7.9.1
 
 test:
   source_files:

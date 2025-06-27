@@ -21,11 +21,27 @@
 +immutable Standard_Integer
 +immutable Standard_Real
 
+# Opaque types -------------------------------------------------------------
++opaque Aspect_XDisplay
++opaque Aspect_XVisualInfo
++opaque Aspect_FBConfig
++opaque __GLXFBConfigRec
++opaque wl_display
++opaque wl_compsitor
++opaque xdg_wm_base
+
 # Sort priority --------------------------------------------------------------
 # Format "+sort mod: pattern=priority"
 # Default priority is 10000, original order is retained within a given priority
 # Pushes all Array1 defs before any Array2
 +sort TColgp: Array1=1
+
+# Excluded modules ------------------------------------------------------------
+-module FlexLexer
+-IVtk
+-IVtkOCC
+-IVtkTools
+-IVtkVTK
 
 # Excluded classes ------------------------------------------------------------
 -class AIS_LocalStatus
@@ -211,6 +227,9 @@
 -rtype *std::ostream*
 
 -function AIS_Line::Points
+
+-function Aspect_DisplayConnection::Aspect_DisplayConnection(const TCollection_AsciiString &)
+-function Aspect_DisplayConnection::Aspect_DisplayConnection(Aspect_XDisplay*)
 
 -function AppDef_MultiLine::SetParameter
 -function* AppDef_*::Error
@@ -733,6 +752,8 @@
 -function Wasm_Window::ProcessUiEvent
 -function Wasm_Window::ProcessFocusEvent
 
+-function Wayland_Window::VirtualKeyFromNative_
+
 # Headers ---------------------------------------------------------------------
 -header* AdvApp2Var_Data_f2c.hxx
 -header* AIS_LocalStatus.hxx
@@ -744,7 +765,7 @@
 -header ProjLib: ProjLib_HCompProjectedCurve.hxx
 -header ProjLib: ProjLib_HProjectedCurve.hxx
 
-+header Aspect: xTypes.h
+#+header Aspect: xTypes.h
 +header AIS: AIS_PyInteractiveObject.hxx
 +header BinMXCAFDoc: BinTools_LocationSet.hxx
 +header bind_NCollection_Array2: bind_NCollection_Array1.hxx
@@ -922,6 +943,10 @@
 +header IVtkTools: vtkRenderer.h
 +header IVtkVTK: vtkRenderer.h
 
+#+header Wayland: xTypes.h
++header Wayland: wayland-client.h
++header Wayland: wayland-egl.h
+# Has definition for tagMSG
 +header WNT: xTypes.h
 
 +header XCAFDoc: TCollection_ExtendedString.hxx
@@ -1232,6 +1257,7 @@
 
 # Add exception translator
 +after_type Standard_Failure-->py::register_exception_translator([](std::exception_ptr p) {try {if (p) std::rethrow_exception(p);} catch (const Standard_Failure &e) { PyErr_SetString(PyExc_RuntimeError, e.GetMessageString());}});
+
 
 # Patches ---------------------------------------------------------------------
 

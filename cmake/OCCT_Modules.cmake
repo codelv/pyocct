@@ -325,6 +325,7 @@ LIST(APPEND OCCT_MODULES
     VrmlConverter
     VrmlData
     Wasm
+    Wayland
     WNT
     XBRepMesh
     XCAFApp

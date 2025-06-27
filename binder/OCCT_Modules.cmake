@@ -103,6 +103,7 @@ LIST(APPEND OCCT_MODULES
     Expr
     Express
     ExprIntrp
+    exptocas
     Extrema
     FairCurve
     FEmTool
@@ -191,10 +192,6 @@ LIST(APPEND OCCT_MODULES
     IntSurf
     IntTools
     IntWalk
-    IVtk
-    IVtkOCC
-    IVtkTools
-    IVtkVTK
     Law
     LDOM
     LDOMBasicString
@@ -295,6 +292,14 @@ LIST(APPEND OCCT_MODULES
     TDF
     TDocStd
     TFunction
+    TKBRep
+    TKDEIGES
+    TKDESTEP
+    TKernel
+    TKMath
+    TKMesh
+    TKV3d
+    TKXSBase
     TNaming
     TObj
     TopAbs
@@ -325,6 +330,7 @@ LIST(APPEND OCCT_MODULES
     VrmlConverter
     VrmlData
     Wasm
+    Wayland
     WNT
     XBRepMesh
     XCAFApp
