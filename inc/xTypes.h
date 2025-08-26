@@ -50,4 +50,10 @@ struct tagMSG {
 };
 #endif
 
+
+struct __GLXFBConfigRec {};
+
+struct Aspect_XDisplay {};
+struct Aspect_XVisualInfo {};
+
 #endif /* !__xTypes_h */

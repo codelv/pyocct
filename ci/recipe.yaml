@@ -8,11 +8,18 @@ source:
   path: ../
 
 build:
-  number: 104
+  number: 100
 
 requirements:
   build:
     - '{{ compiler("cxx") }}'
+    - sel(win): '{{ compiler("cxx") }}'
+    - sel(win): glew
+    - sel(linux): '{{ cdt("libxi-devel") }}'
+    - sel(linux): '{{ cdt("libxext-devel") }}'
+    - sel(linux): libegl-devel
+    - sel(linux): libglx-devel
+    - sel(linux): wayland
     - cmake
     - ninja
     - rapidjson
@@ -22,9 +29,8 @@ requirements:
   host:
     - python
     - pybind11
-    - occt ==7.9.1
-    - sel(linux): wayland
     - setuptools
+    - occt ==7.9.1
 
   run:
     - python

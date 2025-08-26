@@ -109,14 +109,14 @@ find_package(Freetype REQUIRED)
 # --------------------------------------------------------------------------- #
 # GLEW
 # --------------------------------------------------------------------------- #
-#message(STATUS "Searching for GLEW...")
-#find_package(GLEW REQUIRED)
+message(STATUS "Searching for GLEW...")
+find_package(GLEW REQUIRED)
 
 # --------------------------------------------------------------------------- #
 # X11 / Wayland
 # --------------------------------------------------------------------------- #
 if(NOT WIN32 AND NOT APPLE)
-    add_definitions (-DHAVE_XLIB -DHAVE_EGL -DHAVE_WAYLAND)
+    add_definitions (-DHAVE_XLIB)
     find_package(X11 REQUIRED)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(Wayland REQUIRED IMPORTED_TARGET wayland-client wayland-egl)

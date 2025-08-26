@@ -22,13 +22,13 @@
 +immutable Standard_Real
 
 # Opaque types -------------------------------------------------------------
-+opaque Aspect_XDisplay
-+opaque Aspect_XVisualInfo
-+opaque Aspect_FBConfig
-+opaque __GLXFBConfigRec
-+opaque wl_display
-+opaque wl_compsitor
-+opaque xdg_wm_base
+#+opaque Aspect_XDisplay
+#+opaque Aspect_XVisualInfo
+#+opaque Aspect_FBConfig
+#+opaque __GLXFBConfigRec
+#+opaque wl_display
+#+opaque wl_compositor
+#+opaque xdg_wm_base
 
 # Sort priority --------------------------------------------------------------
 # Format "+sort mod: pattern=priority"
