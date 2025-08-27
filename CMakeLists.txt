@@ -189,6 +189,11 @@ foreach(MOD ${OCCT_MODULES})
         continue()
     endif()
 
+    if((NOT USE_VTK) AND (${MOD} MATCHES "IVtk.*"))
+        message(STATUS "Skipping vtk dependent module ${MOD}")
+        continue()
+    endif()
+
     # Check for platform-specific modules
     if((WIN32 OR APPLE) AND (${MOD} STREQUAL "Xw" OR ${MOD} STREQUAL "Wayland"))
         message(STATUS "Skipping platform-specific module ${MOD}")
