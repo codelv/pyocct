@@ -765,7 +765,7 @@
 -header ProjLib: ProjLib_HCompProjectedCurve.hxx
 -header ProjLib: ProjLib_HProjectedCurve.hxx
 
-#+header Aspect: xTypes.h
++header Aspect: xTypes.h
 +header AIS: AIS_PyInteractiveObject.hxx
 +header BinMXCAFDoc: BinTools_LocationSet.hxx
 +header bind_NCollection_Array2: bind_NCollection_Array1.hxx
@@ -943,7 +943,7 @@
 +header IVtkTools: vtkRenderer.h
 +header IVtkVTK: vtkRenderer.h
 
-#+header Wayland: xTypes.h
++header Wayland: xTypes.h
 +header Wayland: wayland-client.h
 +header Wayland: wayland-egl.h
 # Has definition for tagMSG
