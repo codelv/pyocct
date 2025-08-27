@@ -25,7 +25,7 @@ requirements:
     - python
     - pybind11
     - setuptools
-    - occt ==7.9.1
+    - occt ==7.9.1=*novtk*
     - sel(linux): '{{ cdt("libxi-devel") }}'
     - sel(linux): '{{ cdt("libxext-devel") }}'
     - sel(linux): libegl-devel
