@@ -15,11 +15,6 @@ requirements:
     - '{{ compiler("cxx") }}'
     - sel(win): '{{ compiler("cxx") }}'
     - sel(win): glew
-    - sel(linux): '{{ cdt("libxi-devel") }}'
-    - sel(linux): '{{ cdt("libxext-devel") }}'
-    - sel(linux): libegl-devel
-    - sel(linux): libglx-devel
-    - sel(linux): wayland
     - cmake
     - ninja
     - rapidjson
@@ -31,6 +26,11 @@ requirements:
     - pybind11
     - setuptools
     - occt ==7.9.1
+    - sel(linux): '{{ cdt("libxi-devel") }}'
+    - sel(linux): '{{ cdt("libxext-devel") }}'
+    - sel(linux): libegl-devel
+    - sel(linux): libopengl-devel
+    - sel(linux): wayland
 
   run:
     - python

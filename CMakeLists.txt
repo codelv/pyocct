@@ -25,6 +25,9 @@ project(pyOCCT VERSION 7.9.1.0 LANGUAGES C CXX)
 # OPTIONS
 # --------------------------------------------------------------------------- #
 option(ENABLE_WARNINGS "Disable warning output." OFF)
+option(USE_WAYLAND  "Use wayland instead of X for linux" OFF)
+option(USE_VTK "Use VTK" OFF)
+
 
 # --------------------------------------------------------------------------- #
 # SETTINGS
@@ -90,8 +93,10 @@ find_package(pybind11 CONFIG REQUIRED)
 message(STATUS "Searching for OpenGL...")
 if(WIN32 OR APPLE)
     find_package(OpenGL REQUIRED)
+elseif(USE_WAYLAND)
+    find_package(OpenGL REQUIRED EGL)
 else()
-    find_package(OpenGL REQUIRED GLX EGL)
+    find_package(OpenGL REQUIRED GLX)
 endif()
 
 message(STATUS "OpenGL include directory: ${OPENGL_INCLUDE_DIR}")
@@ -109,17 +114,23 @@ find_package(Freetype REQUIRED)
 # --------------------------------------------------------------------------- #
 # GLEW
 # --------------------------------------------------------------------------- #
-message(STATUS "Searching for GLEW...")
-find_package(GLEW REQUIRED)
+if(WIN32)
+    message(STATUS "Searching for GLEW...")
+    find_package(GLEW REQUIRED)
+endif()
 
 # --------------------------------------------------------------------------- #
 # X11 / Wayland
 # --------------------------------------------------------------------------- #
 if(NOT WIN32 AND NOT APPLE)
-    add_definitions (-DHAVE_XLIB)
-    find_package(X11 REQUIRED)
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules(Wayland REQUIRED IMPORTED_TARGET wayland-client wayland-egl)
+    if (USE_WAYLAND)
+        add_definitions(-DHAVE_EGL -DHAVE_WAYLAND)
+        find_package(PkgConfig REQUIRED)
+        pkg_check_modules(Wayland REQUIRED IMPORTED_TARGET wayland-client wayland-egl)
+    else()
+        add_definitions(-DHAVE_XLIB)
+        find_package(X11 REQUIRED)
+    endif()
 endif()
 
 # --------------------------------------------------------------------------- #
@@ -147,8 +158,10 @@ link_directories(${OpenCASCADE_LIBRARY_DIR})
 # ----------------------------------------------------------------------- #
 # VTK
 # ----------------------------------------------------------------------- #
-#message(STATUS "Searching for VTK...")
-#find_package(VTK OPTIONAL CommonCore)
+if (USE_VTK)
+    message(STATUS "Searching for VTK...")
+    find_package(VTK OPTIONAL CommonCore)
+endif()
 
 # --------------------------------------------------------------------------- #
 # pyOCCT
