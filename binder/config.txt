@@ -74,6 +74,7 @@
 -class OpenGl_LayerList
 -class OpenGl_RaytraceGeometry
 -class OpenGl_RaytraceMaterial
+-class OpenGl_GlFunctions
 -class OpenGl_StencilTest
 -class OpenGl_Structure
 -class OpenGl_StructureShadow
