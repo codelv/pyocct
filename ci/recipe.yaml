@@ -1,8 +1,8 @@
-context: {}
+context:
+    version: 7.9.1
 package:
-
   name: pyocct
-  version: 7.9.1
+  version: '{{version}}'
 
 source:
   path: ../
@@ -25,7 +25,7 @@ requirements:
     - python
     - pybind11
     - setuptools
-    - occt ==7.9.1=*novtk*
+    - occt =={{version}}=*novtk*
     - sel(linux): '{{ cdt("libxi-devel") }}'
     - sel(linux): '{{ cdt("libxext-devel") }}'
     - sel(linux): libegl-devel
@@ -34,13 +34,11 @@ requirements:
 
   run:
     - python
-    - occt ==7.9.1
+    - occt =={{version}}=*novtk*
 
 test:
   source_files:
     - test
-  commands:
-    -  python -m unittest discover -v
 
 about:
   home: https://github.com/trelau/pyOCCT

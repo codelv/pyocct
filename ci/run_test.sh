@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 cd test
-python -m unittest discover
+python -m unittest discover -v
