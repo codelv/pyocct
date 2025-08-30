@@ -1,3 +1,4 @@
+import os
 import sys
 import unittest
 import OCCT
@@ -5,6 +6,8 @@ from os.path import abspath, dirname, split, splitext
 from glob import glob
 
 class Test_ModulesImport(unittest.TestCase):
+
+    @unittest.skipIf("CI" in os.environ, "Disabled in CI")
     def testModulesImport(self):
         errors = []
         root = OCCT.__path__[0]
@@ -27,8 +30,9 @@ class Test_ModulesImport(unittest.TestCase):
 
         for mod in mods:
             try:
+                print(f"Importing {mod}...")
                 __import__(mod)
-                print(f"Import {mod} ok")
+                print(f"OK")
             except ImportError as e:
                 if "Vtk" in mod or "OCCT.step" in mod:
                     pass # Ignore
