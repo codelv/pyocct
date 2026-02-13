@@ -5,7 +5,7 @@ dependencies:
   - python=3.13
   - clangdev
   - python-clang
-  - occt ==7.9.2=*novtk*
+  - occt ==7.9.3=*novtk*
   - sel(linux): libcxx-devel
   - tbb-devel
   - rapidjson
